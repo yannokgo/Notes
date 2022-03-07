@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html style="height: 100;width: 100%;margin: 0;">
+<head>
+ <style>
+    pre{color: white; font-size: 18px;}
+    body{background-color: #191919;}
+    
+    ::-webkit-scrollbar {
+      width: 20px;
+    }
+
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey; 
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgb(70, 70, 70); 
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #252525; 
+    }
+ </style>
+</head>
+
+<body style="height: 100;width: 100%;margin: 0;">
+    <pre>
+<font color="#818181">
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||||  S E C T I O N  1  ||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||||||||||  U S E R S  ||||||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||||||||||||||| & |||||||||||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||||||  G R O U P S  |||||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||||||||||||||| & |||||||||||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||  M O D I F I C A T I O N S  ||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+</font>
+
+<font color="#FF0000"><b>****Passer a l'utilisateur ROOT****</b></font>
+        <font color="#02db64"><b>[mariechristine@fedora ~]$ su -</font>
+        Password: 
+
+<font color="#818181">--Creer un utilisateur name1 et un name2  </font>      
+        <font color="#02db64"><b>[root@fedora ~]# useradd name1</font>
+        <font color="#02db64"><b>[root@fedora ~]# useradd name2</font>
+
+<font color="#818181">--Creer ou modifier un mot de passe (par exemple creer un mot de passe pour name1) </font>         
+        <font color="#02db64"><b>[root@fedora ~]# passwd name1</font>
+        Changing password for user name1.
+        New password: 
+        Retype new password: 
+        passwd: all authentication tokens updated successfully.
+
+<font color="#818181">--Creer ou modifier un mot de passe (par exemple creer un mot de passe pour name2) </font>         
+        <font color="#02db64"><b>[root@fedora ~]# passwd name2</font>
+        Changing password for user name2.
+        New password: 
+        Retype new password: 
+        passwd: all authentication tokens updated successfully.
+
+<font color="#818181">--Effacer un utilisateur (par exemple bart) </font> 
+        <font color="#02db64"><b>[root@fedora ~]# userdel -r bart</font> 
+
+
+<font color="#818181">--Creer un groupe group1 </font>      
+        <font color="#02db64"><b>[root@fedora ~]# groupadd group1</font>
+
+<font color="#818181">--Creer un groupe group2  </font>
+        <font color="#02db64"><b>[root@fedora ~]# groupadd group2</font>
+
+<font color="#818181">--Supprimer un groupe group3  </font>
+        <font color="#02db64"><b>[root@fedora ~]# groupdel group2</font>
+        
+<font color="#818181">--Ajouter name1 au groupe group1 comme groupe PRIMAIRE (-g pour groupe PRIMAIRE)</font>         
+        <font color="#02db64"><b>[root@fedora ~]# usermod  -g group1 name1</font>
+
+<font color="#818181">--Ajouter name2 au groupe group1 comme groupe SECONDAIRE (-G pour groupe SECONDAIRE)  </font>            
+        <font color="#02db64"><b>[root@fedora ~]# usermod  -G group1 name2</font>
+
+<font color="#818181">--Afficher l'id (identification) de name1</font>
+**uid = USER ID, gid = PRIMARY GROUP ID, groups = EVERY GROUPS THIS USER IS IN
+        <font color="#02db64"><b>[root@fedora ~]# id name1</font>
+        uid=1007(name1) gid=1014(group1) groups=1014(group1)
+
+<font color="#818181">--Afficher l'id (identification) de name2</font>
+**uid = USER ID, gid = PRIMARY GROUP ID, groups = EVERY GROUPS THIS USER IS IN
+        <font color="#02db64"><b>[root@fedora ~]# id name2</font>
+        uid=1008(name2) gid=1013(name2) groups=1013(name2),1014(group1)
+
+<font color="#818181">--Ajouter name2 dans group2 (pour ne pas remplacer le groupe SECONDAIRE et en place l'ajouter on rajoute -a)</font>
+        <font color="#02db64"><b>[root@fedora ~]# usermod -a -G group2 name2</font>
+
+<font color="#818181">--Changer les informations FINGER a l'utilisateur name1  </font>        
+        <font color="#02db64"><b>[root@fedora ~]# chfn name1</font>
+        Changing finger information for name1.
+ >>     Name []: Tom
+ >>     Office []: 111
+ >>     Office Phone []: 5415551111
+ >>     Home Phone []: 
+ >>     Finger information changed. 
+
+<font color="#818181">--Afficher les informations FINGER de name1</font>
+        <font color="#02db64"><b>[root@fedora ~]# finger name1</font>
+        Login: name1                Name: Tom
+        Directory: /home/name1     	Shell: /bin/bash
+        Office: 111, 541-555-1111
+        Never logged in.
+        No mail.
+        No Plan.
+
+<font color="#818181">--Afficher l'id (identification) de name1 </font>       
+        <font color="#02db64"><b>[root@fedora ~]# id name1</font>
+        uid=1007(name1) gid=1014(group1) groups=1014(group1)
+
+<font color="#818181">--Afficher l'uid (user identification) de name1 </font>
+        <font color="#02db64"><b>[root@fedora ~]# id -u  name1</font>
+        1007
+
+<font color="#818181">--Afficher l'gid (PRIMARY group identification) de name1 </font>
+        <font color="#02db64"><b>[root@fedora ~]# id -g  name1</font>
+        1014
+
+<font color="#818181">--Afficher l'id (identification) de name2    </font>    
+        <font color="#02db64"><b>[root@fedora ~]# id name2</font>
+        uid=1008(name2) gid=1013(name2) groups=1013(name2),1014(group1),1015(group2)
+
+<font color="#818181">--Afficher le groups id (PRIMARY group identification) de name2  </font>
+        <font color="#02db64"><b>[root@fedora ~]# id -g  name2</font>
+        1013
+
+<font color="#818181">--Afficher l'gid (ALL groups identification) de name2   </font>    
+        <font color="#02db64"><b>[root@fedora ~]# id -G  name2</font>
+        1013 1014 1015
+        
+<font color="#818181">--LOCK un utilisateur (par exemple : name1)</font>
+        <font color="#02db64"><b>[root@fedora ~]# usermod -L name1</font>
+
+<font color="#818181">--Changer la date d'expiration du compte n1 au 07 mars 2022 (aaaa/mm/jj)</font>
+        <font color="#02db64"><b>[root@fedora ~]# chage -E 2022-03-07 name1</font>
+        
+<font color="#818181">--Afficher les options d'age du compte name1 (date d'expiration, derniere modification du mot de passe)    </font>      
+        <font color="#02db64"><b>[root@fedora ~]# chage -l name1</font>
+        Last password change			: Mar 02, 2022
+        Password expires					: never
+        Password inactive					: never
+        Account expires						: Mar 07, 2022
+        Minimum number of days between password change		: 0
+        Maximum number of days between password change		: 99999
+        Number of days of warning before password expires	: 7
+
+<font color="#818181">--Enlever / Effacer le compte name2 du group1  </font>       
+        <font color="#02db64"><b>[root@fedora ~]# gpasswd -d name2 group1</font>
+        Removing user name2 from group group1
+
+<font color="#818181">--Afficher l'gid (ALL groups identification) de name2 </font>
+        <font color="#02db64"><b>[root@fedora ~]# id -G  name2</font>
+        1013 1015
+
+<font color="#818181">
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||||  S E C T I O N  2  ||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||||||||||  F I L E S  ||||||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||||||||||||||| & |||||||||||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||||||  F O L D E R S  |||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||||||||||||||| & |||||||||||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||  D I R E C T O R I E S  |||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+</font>
+
+<font color="#818181">--Afficher le repertoire courant</font>
+        <font color="#02db64"><b>[root@fedora ~]# pwd</font>
+        /root
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant</font>       
+        <font color="#02db64"><b>[root@fedora ~]# ls</font>
+        anaconda-ks.cfg  <font color="#9CDCFE"><b>Documents</b></font>  initial-setup-ks.cfg  <font color="#9CDCFE"><b>Pictures</b></font>  <font color="#9CDCFE"><b>Templates</b></font>
+        <font color="#9CDCFE"><b>Desktop</b></font>          <font color="#9CDCFE"><b>Downloads</b></font>  <font color="#9CDCFE"><b>Music</b></font>                 <font color="#9CDCFE"><b>Public</b></font>    <font color="#9CDCFE"><b>Videos</b></font>
+
+<font color="#818181">--Dir liste egalement les dossiers et fichiers dans le repertoire courant mais sans couleurs pour les dossiers</font>        
+        <font color="#02db64"><b>[root@fedora ~]# dir </font>
+        anaconda-ks.cfg  Documents  initial-setup-ks.cfg  Pictures  Templates
+        Desktop		 Downloads  Music		  Public    Videos
+        
+<font color="#818181">--Liste les dossiers et fichiers dans le repertoire /home</font>
+        <font color="#02db64"><b>[root@fedora ~]# ls  /home</font>
+        <font color="#9CDCFE"><b>bart</b></font>  <font color="#9CDCFE"><b>edward</b></font>  <font color="#9CDCFE"><b>exemple1</b></font>  <font color="#9CDCFE"><b>homer</b></font>  <font color="#9CDCFE"><b>lisa</b></font>  <font color="#9CDCFE"><b>louis</b></font>  <font color="#9CDCFE"><b>mariechristine</b></font>  <font color="#9CDCFE"><b>name1</b></font>  <font color="#9CDCFE"><b>name2</b></font>
+
+<font color="#818181">--Liste les dossiers et fichiers dans le repertoire /home/mariechristine</font>        
+        <font color="#02db64"><b>[root@fedora ~]# ls /home/mariechristine</font>
+        <font color="#9CDCFE"><b>Desktop</b></font>  <font color="#9CDCFE"><b>Documents</b></font>  <font color="#9CDCFE"><b>Downloads</b></font>  <font color="#9CDCFE"><b>Music</b></font>  <font color="#9CDCFE"><b>Pictures</b></font>  <font color="#9CDCFE"><b>Public</b></font>  <font color="#9CDCFE"><b>Templates</b></font>  <font color="#9CDCFE"><b>Videos</b></font>
+
+<font color="#818181">--Liste absolument tous les dossiers et fichiers dans le repertoire /home/mariechristine (affiche les dossier cachées)</font>  
+        <font color="#02db64"><b>[root@fedora ~]# ls -a /home/mariechristine</font>
+        <font color="#9CDCFE"><b>.</b></font>              .bashrc    <font color="#9CDCFE"><b>Documents</b></font>  <font color="#9CDCFE"><b>Pictures</b></font>          .xsession-errors.old
+        <font color="#9CDCFE"><b>..</b></font>             <font color="#9CDCFE"><b>.cache</b></font>     <font color="#9CDCFE"><b>Downloads</b></font>  <font color="#9CDCFE"><b>Public</b></font>
+        .bash_history  <font color="#9CDCFE"><b>.cinnamon</b></font>  <font color="#9CDCFE"><b>.local</b></font>     <font color="#9CDCFE"><b>Templates</b></font>
+        .bash_logout   <font color="#9CDCFE"><b>.config</b></font>    <font color="#9CDCFE"><b>.mozilla</b></font>   <font color="#9CDCFE"><b>Videos</b></font>
+        .bash_profile  <font color="#9CDCFE"><b>Desktop</b></font>    <font color="#9CDCFE"><b>Music</b></font>      .xsession-errors
+        
+<font color="#818181">--Liste les dossiers et fichiers dans /home/mariechristine avec autorisations, groupes et utilisateurs et temps de modification </font>    
+        <font color="#02db64"><b>[root@fedora ~]# ll /home/mariechristine</font>
+        total 0
+        drwxr-xr-x. 1 mariechristine mariechristine 0 Feb 17 10:00 <font color="#9CDCFE"><b>Desktop</b></font>
+        drwxr-xr-x. 1 mariechristine mariechristine 0 Feb 17 10:00 <font color="#9CDCFE"><b>Documents</b></font>
+        drwxr-xr-x. 1 mariechristine mariechristine 0 Feb 17 10:00 <font color="#9CDCFE"><b>Downloads</b></font>
+        drwxr-xr-x. 1 mariechristine mariechristine 0 Feb 17 10:00 <font color="#9CDCFE"><b>Music</b></font>
+        drwxr-xr-x. 1 mariechristine mariechristine 0 Feb 17 10:00 <font color="#9CDCFE"><b>Pictures</b></font>
+        drwxr-xr-x. 1 mariechristine mariechristine 0 Feb 17 10:00 <font color="#9CDCFE"><b>Public</b></font>
+        drwxr-xr-x. 1 mariechristine mariechristine 0 Feb 17 10:00 <font color="#9CDCFE"><b>Templates</b></font>
+        drwxr-xr-x. 1 mariechristine mariechristine 0 Feb 17 10:00 <font color="#9CDCFE"><b>Videos</b></font>
+
+<font color="#818181">--Change de repertoire de root a /home/mariechristine (se deplacer vers)</font>
+        <font color="#02db64"><b>[root@fedora ~]# cd /home/mariechristine</font>
+
+<font color="#818181">--Afficher le repertoire courant</font>
+        <font color="#02db64"><b>[root@fedora mariechristine]# pwd</font>
+        /home/mariechristine
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant   </font>     
+        <font color="#02db64"><b>[root@fedora mariechristine]# ls</font>
+        <font color="#9CDCFE"><b>Desktop</b></font>  <font color="#9CDCFE"><b>Documents</b></font>  <font color="#9CDCFE"><b>Downloads</b></font>  <font color="#9CDCFE"><b>Music</b></font>  <font color="#9CDCFE"><b>Pictures</b></font>  <font color="#9CDCFE"><b>Public</b></font>  <font color="#9CDCFE"><b>Templates</b></font>  <font color="#9CDCFE"><b>Videos</b></font>
+
+<font color="#818181">--Change de repertoire de mariechristine a Desktop (se deplacer vers)</font>
+        <font color="#02db64"><b>[root@fedora mariechristine]# cd Desktop</font>
+
+<font color="#818181">--Creer un dossier test</font>
+        <font color="#02db64"><b>[root@fedora Desktop]# mkdir test</font>
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant</font>
+        <font color="#02db64"><b>[root@fedora Desktop]# ls</font>
+        <font color="#9CDCFE"><b>test</b></font>
+
+<font color="#818181">--Creer un dossier fix</font>
+        <font color="#02db64"><b>[root@fedora Desktop]# mkdir fix</font>
+          
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant   </font>       
+        <font color="#02db64"><b>[root@fedora Desktop]# ls</font>
+        <font color="#9CDCFE"><b>test</b></font> <font color="#9CDCFE"><b>fix</b></font>
+
+<font color="#818181">--Change de repertoire de Desktop a test (se deplacer vers)</font>
+        <font color="#02db64"><b>root@fedora Desktop]# cd test</font>
+
+<font color="#818181">--Afficher le texte 'textfile' (affiche ce que tu écrit comme un echo apres que tu crie) </font>
+        <font color="#02db64"><b>[root@fedora test]# echo textfile</font>
+        textfile
+
+<font color="#818181">--Ecrit hi my name is mariechristine dans un fichier .txt text2 (ou le creer s'il n'existe pas) </font>
+        <font color="#02db64"><b>[root@fedora test]# echo hi my name is mariechristine > text2</font>
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant </font>         
+        <font color="#02db64"><b>[root@fedora test]# ls</font>
+        test2
+
+<font color="#818181">--Afficher ce que contient le fichier text2.txt </font>
+        <font color="#02db64"><b>[root@fedora test]# cat text2</font>
+        hi my name is mariechristine
+
+<font color="#818181">--Change de repertoire de test a Desktop (se deplacer en arriere de un dossier)</font>
+        <font color="#02db64"><b>[root@fedora test]# cd ..</font>
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant   </font>
+        <font color="#02db64"><b>[root@fedora Desktop]# ls</font>
+        <font color="#9CDCFE"><b>fix</b></font>  <font color="#9CDCFE"><b>test</b></font>
+
+<font color="#818181">--Change de repertoire de Desktop a fix (se deplacer vers)</font>
+        <font color="#02db64"><b></b>[root@fedora Desktop]# cd fix</font>
+
+<font color="#818181">--Ecrit mariechristine 4501112222 dans un fichier .txt textfile (ou le creer s'il n'existe pas)</font>
+        <font color="#02db64"><b>[root@fedora fix]# echo mariechristine 4501112222 > textfile</font>
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant </font>         
+        <font color="#02db64"><b>[root@fedora fix]# ls</font>
+        textfile
+
+<font color="#818181">--Afficher ce que contient le fichier textfile.txt    </font>     
+        <font color="#02db64"><b>[root@fedora fix]# cat textfile</font>
+        mariechristine 4501112222
+
+<font color="#818181">--Copy le fichier texte textfile et le paste au dossier /home/mariechristine   </font>      
+        <font color="#02db64"><b>[root@fedora fix]# cp textfile /home/mariechristine</font>
+
+<font color="#818181">--Change de repertoire de fix a Desktop (se deplacer en arriere)   </font>       
+        <font color="#02db64"><b>[root@fedora fix]# cd ..</font>
+          
+<font color="#818181">--Change de repertoire de Desktop a mariechristine (se deplacer en arriere de un dossier) </font>            
+        <font color="#02db64"><b>[root@fedora Desktop]# cd ..</font>
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant    </font>       
+        <font color="#02db64"><b>[root@fedora mariechristine]# ls</font>
+        <font color="#9CDCFE"><b>Desktop</b></font>  <font color="#9CDCFE"><b>Documents</b></font>  <font color="#9CDCFE"><b>Downloads</b></font>  <font color="#9CDCFE"><b>Music</b></font>  <font color="#9CDCFE"><b>Pictures</b></font>  <font color="#9CDCFE"><b>Public</b></font>  <font color="#9CDCFE"><b>Templates</b></font>  textfile  <font color="#9CDCFE"><b>Videos</b></font>
+
+<font color="#818181">--Supprime / enleve le fichier texte textfile du repertoire courant (y = yes)(n = no)   </font>     
+        <font color="#02db64"><b>[root@fedora mariechristine]#  rm  textfile</font>
+        rm: remove regular file &apos;textfile&apos;? y
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant  </font>
+        <font color="#02db64"><b>[root@fedora mariechristine]# ls</font>
+        <font color="#9CDCFE"><b>Desktop</b></font>  <font color="#9CDCFE"><b>Documents</b></font>  <font color="#9CDCFE"><b>Downloads</b></font>  <font color="#9CDCFE"><b>Music</b></font>  <font color="#9CDCFE"><b>Pictures</b></font>  <font color="#9CDCFE"><b>Public</b></font>  <font color="#9CDCFE"><b>Templates</b></font>  <font color="#9CDCFE"><b>Videos</b></font>
+
+<font color="#818181">--Change de repertoire de mariechristine a Desktop (se deplacer vers)  </font>
+        <font color="#02db64"><b>[root@fedora mariechristine]# cd Desktop</font>
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant </font>          
+        <font color="#02db64"><b>[root@fedora Desktop]# ls</font>
+        <font color="#9CDCFE"><b>fix</b></font>  <font color="#9CDCFE"><b>test</b></font>
+
+<font color="#818181">--Deplace le dossier fix vers /home/name1     </font>    
+        <font color="#02db64"><b>[root@fedora Desktop]# mv fix /home/name1</font>
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant </font>
+        <font color="#02db64"><b>[root@fedora Desktop]# ls</font>
+        <font color="#9CDCFE"><b>test</b></font>
+
+<font color="#818181">--Change de repertoire de Desktop a mariechristine (se deplacer en arriere de un dossier)     </font>     
+        <font color="#02db64"><b>[root@fedora Desktop]# cd ..</font>
+
+<font color="#818181">--Change de repertoire de mariechristine a home (se deplacer en arriere de un dossier)  </font>             
+        <font color="#02db64"><b>[root@fedora mariechristine]# cd ..</font>
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant </font>
+        <font color="#02db64"><b>[root@fedora home]# ls</font>
+        <font color="#9CDCFE"><b>bart</b></font>  <font color="#9CDCFE"><b>edward</b></font>  <font color="#9CDCFE"><b>exemple1</b></font>  <font color="#9CDCFE"><b>homer</b></font>  <font color="#9CDCFE"><b>lisa</b></font>  <font color="#9CDCFE"><b>louis</b></font>  <font color="#9CDCFE"><b>mariechristine</b></font>  <font color="#9CDCFE"><b>mariechtistine</b></font>  <font color="#9CDCFE"><b>name1</b></font>  <font color="#9CDCFE"><b>name2</b></font>
+
+<font color="#818181">--Change de repertoire de home a name1 (se deplacer vers)  </font>       
+        <font color="#02db64"><b>[root@fedora home]# cd name1</font>
+
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant </font>          
+        <font color="#02db64"><b>[root@fedora name1]# ls</font>
+        <font color="#9CDCFE"><b>fix</b></font>
+
+<font color="#818181">--Change de repertoire de name1 a fix (se deplacer vers)  </font>       
+        <font color="#02db64"><b>[root@fedora home]# cd fix</font>        
+
+<font color="#818181">--Combien de mots dans le fichier texte textfile</font>
+        <font color="#02db64"><b>[root@fedora fix]# wc -w textfile</font>
+        2 textfile
+
+<font color="#818181">--Combien de caractère dans le fichier texte textfile   </font>     
+        <font color="#02db64"><b>[root@fedora fix]# wc -m  textfile</font>
+        26 textfile
+
+<font color="#818181">--Combien de lignes dans le fichier texte textfile  </font>
+        <font color="#02db64"><b>[root@fedora fix]# wc -l  textfile</font>
+        1 textfile
+
+    
+<font color="#818181">
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||||  S E C T I O N  3  ||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||  A U T O R I S A T I O N S  |||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||||#########################||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||| S T A N D A R D S ||||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||||||||||| & ||||||||||||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||  S P E C I A L E S  |||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+</font>        
+
+<font color="#818181">--Change de repertoire de name1 a fix (se deplacer vers)  </font>               
+        <font color="#02db64"><b>[root@fedora ~]# cd /home/Marie</font>
+                
+<font color="#818181">--Creer un dossier Marie_secret_file   </font>                    
+        <font color="#02db64"><b>[root@fedora Marie]# mkdir Marie_secret_file</font>
+
+<font color="#818181">--Creer un dossier Public_file   </font>                    
+        <font color="#02db64"><b>[root@fedora Marie]# mkdir Public_file</font>
+               
+<font color="#818181">--Liste des dossiers et fichiers dans le repertoire courant   </font>                    
+        <font color="#02db64"><b>[root@fedora Marie]# ls</font>
+        <font color="#9CDCFE"><b>Marie_secret_file</b></font>  <font color="#9CDCFE"><b>Public_file</b></font>
+
+<font color="#818181">--Liste les dossiers et fichiers avec autorisations, groupes et utilisateurs et temps de modification   </font>            
+        <font color="#02db64"><b>[root@fedora Marie]# ll</font>
+        total 0
+        drwxr-xr-x 1 root root 0  3 mar 19:38 <font color="#9CDCFE"><b>Marie_secret_file</b></font>
+
+<font color="#818181">--Changer le proprietaire (owner) d'un repertoire / dossier <br>(par exemple : dossier = Marie_secret_file et proprietaire Marie(utilisateur).Marie(Groupe PRIMAIRE))  </font>            
+        <font color="#02db64"><b>[root@fedora Marie]# chown Marie.Marie /home/Marie/Marie_secret_file</font>
+
+<font color="#818181">--Changer les autorisations d'un repertoire / dossier <br> 
+4 2 1 [DECIMAL]
+1 0 0 [BINAIRE]
+0 1 0 [BINAIRE]
+0 0 1 [BINAIRE]
+r w x [read(r), write(w), execute(x)
+
+par exemple 700 = 111 000 000 = rwx --- --- pour le dossier Marie_secret_file 
+pour autoriser que Marie a lire ecrire et executer 
+dans le fichier</font>]                    
+        <font color="#02db64"><b>[root@fedora Marie]# chmod 700 /home/Marie/Marie_secret_file</font>
+
+<font color="#818181">par exemple 777 = 111 111 111 = rwx rwx rwx pour le dossier Public_file 
+pour autoriser que marie a lire ecrire et executer 
+dans le fichier  </font>                    
+        <font color="#02db64"><b>[root@fedora Marie]# chmod 777 /home/Marie/Public_file</font>
+
+<font color="#818181">--Liste les dossiers et fichiers avec autorisations, groupes et utilisateurs et temps de modification </font>                    
+        <font color="#02db64"><b>[root@fedora Marie]# ll</font>
+        total 0
+        drwx------ 1 Marie Marie 0  3 mar 19:38 <font color="#9CDCFE"><b>Marie_secret_file</b></font>
+        drwxrwxrwx 1 root  root  0  3 mar 19:38 <span style="color:#9CDCFE"><font color="#9CDCFE">Public_file</font></span>
+
+<font color="#818181">--The SetUID bit enforces user ownership 
+on an executable file. When it is set, the file willexecute 
+with the file owner's user ID, not the personrunning it.
+
+ici on ajoute le SetUID au dossier Marie_secret_file</font>            
+        <font color="#02db64"><b>[root@fedora Marie]# chmod u+s /home/Marie/Marie_secret_file</font>
+
+<font color="#818181">--Ajoute l'autorisation spéciale STICKY-BIT qui protège les répertoires et leur contenu 
+contre le piratage par des non-propriétaires.
+Le système de fichiers traite les fichiers de cesrépertoires 
+d'une manière spéciale afin que seul lepropriétaire dufichier, 
+le propriétaire du répertoireou l'utilisateur rootpuisse 
+renommer ou supprimer lefichier
+
+ici on ajout le STICKY-BIT au dossier Public_file
+          </font>                    
+        <font color="#02db64"><b>[root@fedora Marie]# chmod +t /home/Marie/Public_file</font>
+
+<font color="#818181">--Liste les dossiers et fichiers avec autorisations, groupes et utilisateurs et temps de modification   </font>                    
+        <font color="#02db64"><b>[root@fedora Marie]# ll</font>
+        total 0
+        drws------ 1 Marie Marie 0  3 mar 19:38 <font color="#9CDCFE"><b>Marie_secret_file</b></font>
+        drwxrwxrwt 1 root  root  0  3 mar 19:38 <span style="color:#9CDCFE"><fontcolor="#171421">Public_file</font></span>
+
+<font color="#818181">--Arborescence les dossiers et fichiers avec autorisations, groupes et utilisateurs et temps de modification  </font>            
+        <font color="#02db64"><b>[root@fedora Marie]# tree -lugp /home/Marie</font>
+        <font color="#9CDCFE"><b>/home/Marie</b></font>
+        ├── [drws------ Marie    Marie   ]  <font color="#9CDCFE"><b>Marie_secret_file</b></font>
+        └── [drwxrwxrwt root     root    ]  <span style="color:#9CDCFE"><fontcolor="#171421">Public_file</font></span>
+        
+        2 directories, 0 files
+
+
+<font color="#818181">
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||||  S E C T I O N  4  ||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||||||||  D I S Q U E S  ||||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||||#########################||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||||||||||||||| P A R T I T I O N S ||||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      |||||||||||||||||||||||||||||||||||||#########################||||||||||||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+      ||||||||||||||||||||||||||  P R I M A I R E _ E T E N D U E _ T Y P E S ||||||||||||||||||||||||
+      ////////////////////////////////////////////////////////////////////////////////////////////////
+</font>        
+
+<font color="#818181">--format disk -list : Liste tout les disques et partitions</font>  
+<font color="#02db64"><b>[root@fedora ~]# fdisk -l</b></font>
+    
+    
+        <font color="#9CDCFE"><b>Disk /dev/nvme0n1: 20 GiB, 21474836480 bytes, 41943040 sectors</b></font>
+        Disk model: VMware Virtual NVMe Disk
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        Disklabel type: dos
+        Disk identifier: 0x1e6ed02b
+        
+        <font color="#9CDCFE"><b>Device        </b></font> <font color="##9CDCFE"><b>Boot</b></font> <font color="#9CDCFE"><b>  Start</b></font> <font       color="#9CDCFE"><b>     End</b></font> <font color="#9CDCFE"><b> Sectors</b></font> <font color="#9CDCFE"><b>Size</b></font> <font    color="#9CDCFE"><b>Id</b></font> <font color="#9CDCFE"><b>Type</b></font>
+        /dev/nvme0n1p1 *       2048  2099199  2097152   1G 83 Linux
+        /dev/nvme0n1p2      2099200 41943039 39843840  19G 83 Linux
+        
+        
+        <font color="#9CDCFE"><b>Disk /dev/nvme0n2: 10 GiB, 10737418240 bytes, 20971520 sectors</b></font>
+        Disk model: VMware Virtual NVMe Disk
+        Units: sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+        
+        
+        <font color="#9CDCFE"><b>Disk /dev/zram0: 2.87 GiB, 3078619136 bytes, 751616 sectors</b></font>
+        Units: sectors of 1 * 4096 = 4096 bytes
+        Sector size (logical/physical): 4096 bytes / 4096 bytes
+        I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+<font color="#818181">--format disk /repertoire/ (par exemple le disque nvme0n2) : 
+Ouvre le programme de commandes FORMAT-DISK</font>          
+<font color="#02db64"><b>[root@fedora ~]# fdisk /dev/nvme0n2</b></font>
+        
+                <font color="#26A269">Welcome to fdisk (util-linux 2.37.3).</font>
+                Changes will remain in memory only, until you decide to write them.
+                Be careful before using the write command.
+
+                Device does not contain a recognized partition table.
+                Created a new DOS disklabel with disk identifier 0x1f354486.
+
+<font color="#818181">>> n cree une nouvelle partition
+>>> p pour partition PRIMAIRE
+>>>> Choisir numero 1 a 4 pour PRIMAIRE
+>>>>> Selectionner le premier secteur par default
+>>>>>> +2G pour ajouter 2Gib  </font>                  
+                <font color="#02db64"><b>Command (m for help): n</b></font>
+                Partition type
+                   p   primary (0 primary, 0 extended, 4 free)
+                   e   extended (container for logical partitions)
+                Select (default p): p
+                Partition number (1-4, default 1): 1
+                First sector (2048-20971519, default 2048): 2048
+                Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-20971519, default 20971519): +2G
+
+                Created a new partition 1 of type &apos;Linux&apos; and of size 2 GiB.
+
+<font color="#818181">>> n cree une nouvelle partition
+>>> p pour partition PRIMAIRE
+>>>> Choisir numero 1 a 4 pour PRIMAIRE
+>>>>> Selectionner le premier secteur par default
+>>>>>> +2G pour ajouter 2Gib  </font>                  
+                <font color="#02db64"><b>Command (m for help): n</b></font>
+                Partition type
+                   p   primary (1 primary, 0 extended, 3 free)
+                   e   extended (container for logical partitions)
+                Select (default p): p
+                Partition number (2-4, default 2): 2
+                First sector (4196352-20971519, default 4196352): 4196352
+                Last sector, +/-sectors or +/-size{K,M,G,T,P} (4196352-20971519, default 20971519): +2G
+
+                Created a new partition 2 of type &apos;Linux&apos; and of size 2 GiB.
+
+<font color="#818181">>> p pour PRINT / afficher la liste des partitions du disque et leurs infos   </font>             
+                <font color="#02db64"><b>Command (m for help): p</b></font>
+                <font color="#02db64"><b>Disk /dev/nvme0n2: 10 GiB, 10737418240 bytes, 20971520 sectors</b></font>
+                Disk model: VMware Virtual NVMe Disk
+                Units: sectors of 1 * 512 = 512 bytes
+                Sector size (logical/physical): 512 bytes / 512 bytes
+                I/O size (minimum/optimal): 512 bytes / 512 bytes
+                Disklabel type: dos
+                Disk identifier: 0x1f354486
+
+                <font color="#02db64"><b>Device        </b></font> <font color="#02db64"><b>Boot</b></font> <font color="#02db64"><b>  Start</b></font>         <font       color="#02db64"><b>    End</b></font> <font color="#02db64"><b>Sectors</b></font> <font color="#02db64"><b>Size</b></font>  <font      color="#02db64"><b>Id</b></font> <font color="#02db64"><b>Type</b></font>
+                /dev/nvme0n2p1         2048 4196351 4194304   2G 83 Linux
+                /dev/nvme0n2p2      4196352 8390655 4194304   2G 83 Linux
+
+<font color="#818181">>> t pour changer de TYPE de partition
+>>> Selectionner le chiffre de la partition (ex:2)
+>>>> Choisir le type de partition (ex:b pour FAT32)
+===== L pour la liste des types de partitions </font>
+                
+                <font color="#02db64"><b>Command (m for help): t</b></font>
+                Partition number (1,2, default 2): 2
+                Hex code or alias (type L to list all): b
+
+                Changed type of partition &apos;Linux&apos; to &apos;W95 FAT32&apos;.
+
+<font color="#818181">>> w to save and quit
+>>> q to quit without saving  </font>              
+                <font color="#02db64"><b>Command (m for help): w</b></font>
+                The partition table has been altered.
+                Calling ioctl() to re-read partition table.
+                Syncing disks.
+        
+<font color="#818181">--La commande make file system format le type d'une partition
+--- Pour voir les systèmes de fichiers que mkfs peut créer, 
+    tapez mkfs, puis appuyez deux fois sur la touche Tab et puis entrer.
+---- ici on format notre partition1 sur nvme0n2p1 en ext4 
+
+</font>    </font>                  
+        <font color="#02db64"><b>[root@fedora ~]# mkfs.ext4 /dev/nvme0n2p1</b></font>
+        mke2fs 1.46.3 (27-Jul-2021)
+        Creating filesystem with 524288 4k blocks and 131072 inodes
+        Filesystem UUID: b5c8fa1d-4d09-43de-9aed-39332aafbffb
+        Superblock backups stored on blocks: 
+          32768, 98304, 163840, 229376, 294912
+
+        Allocating group tables: done                            
+        Writing inode tables: done                            
+        Creating journal (16384 blocks): done
+        Writing superblocks and filesystem accounting information: done 
+        
+<font color="#818181">-- ici on format notre partition2 sur nvme0n2p2 en vfat</font>          
+        <font color="#02db64"><b>[root@fedora ~]# mkfs.vfat /dev/nvme0n2p2</b></font>
+mkfs.fat 4.2 (2021-01-31)
+
+<font color="#818181">--Creer un dossier LINUX dans /mnt/ (mkdir /mnt/LINUX)</font>
+        <font color="#02db64"><b>[root@fedora ~]# mkdir /mnt/LINUX</b></font>
+
+<font color="#818181">--Creer un dossier FAT32 dans /mnt/ (mkdir /mnt/FAT32) </font>       
+        <font color="#02db64"><b>[root@fedora ~]# mkdir /mnt/FAT32</b></font>
+
+<font color="#818181">--Monter la partition1 /dev/nvme0n2p1 en type ext4 sur le 
+dossier /mnt/LINUX       </font>
+        <font color="#02db64"><b>[root@fedora ~]# mount -t ext4 /dev/nvme0n2p1 /mnt/LINUX</b></font>
+        
+<font color="#818181">--Monter la partition1 /dev/nvme0n2p2 en type vfat sur le 
+ dossier /mnt/FAT32 </font>         
+        <font color="#02db64"><b>[root@fedora ~]# mount -t vfat /dev/nvme0n2p2 /mnt/FAT32</b></font>
+
+<font color="#818181">--Creer un dossier windows dans /mnt/FAT32 (mkdir /mnt/FAT32/)</font>         
+        <font color="#02db64"><b>[root@fedora ~]# mkdir /mnt/FAT32/windows</b></font>
+
+<font color="#818181">--La commande touch est principalement utilisée pour 
+modifier les horodatages des fichiers, mais si le fichier (dont le nom est passé en argument) 
+n'existe pas, alors l'outil le crée.</font>
+
+<font color="#818181">--ici on cree un fichier test.txt car il n'existe pas...</font>
+        <font color="#02db64"><b>[root@fedora ~]# touch /mnt/FAT32/windows/test.txt</b></font>
+
+<font color="#818181">--DISK_FREE affiche tous les disques montés et leurs dossier de montage</font>   
+        <font color="#02db64"><b>[root@fedora ~]# df -l</font>
+        Sys. de fichiers blocs de 1K Utilisé Disponible Uti% Monté sur
+        devtmpfs             1967440       0    1967440   0% /dev
+        tmpfs                1987776       0    1987776   0% /dev/shm
+        tmpfs                 795112    1648     793464   1% /run
+        /dev/nvme0n1p2      35650560 4105720   31311064  12% /
+        tmpfs                1987776      12    1987764   1% /tmp
+        /dev/nvme0n1p2      35650560 4105720   31311064  12% /home
+        /dev/nvme0n1p1        996780  175160     752808  19% /boot
+        tmpfs                 397552      88     397464   1% /run/user/1000
+        /dev/sr0             2115360 2115360          0 100% /run/media/matandessaur/Fedora-Cinn-Live-35-1-2
+        /dev/nvme0n2p2       2093048       4    2093044   1% /mnt/FAT32
+
+<font color="#818181">D--ISK_USAGE utilisé pour vérifier les informations d'utilisation du disque des fichiers et des répertoires sur une machine</font>   
+        <font color="#02db64"><b>[root@fedora ~]# du -l</font>
+        4	./.cache/dconf
+        0	./.cache/geany
+        0	./.cache/doc
+        0	./.cache/gvfsd
+        0	./.cache/gvfs
+        10628	./.cache/mozilla/firefox/ccifue6q.default-release/startupCache
+        18272	./.cache/mozilla/firefox/ccifue6q.default-release/cache2/entries
+        4	./.cache/mozilla/firefox/ccifue6q.default-release/cache2/trash23420492
+        0	./.cache/mozilla/firefox/ccifue6q.default-release/cache2/doomed
+        18276	./.cache/mozilla/firefox/ccifue6q.default-release/cache2
+        32	./.cache/mozilla/firefox/ccifue6q.default-release/thumbnails
+        20	./.cache/mozilla/firefox/ccifue6q.default-release/settings/main/ms-language-packs/browser/newtab
+        20	./.cache/mozilla/firefox/ccifue6q.default-release/settings/main/ms-language-packs/browser
+        20	./.cache/mozilla/firefox/ccifue6q.default-release/settings/main/ms-language-packs
+        20	./.cache/mozilla/firefox/ccifue6q.default-release/settings/main
+        20	./.cache/mozilla/firefox/ccifue6q.default-release/settings
+        11876	./.cache/mozilla/firefox/ccifue6q.default-release/safebrowsing/google4
+        13948	./.cache/mozilla/firefox/ccifue6q.default-release/safebrowsing
+        42908	./.cache/mozilla/firefox/ccifue6q.default-release
+        0	./.cache/mozilla/firefox/mftz0p9a.default
+        42908	./.cache/mozilla/firefox
+        42908	./.cache/mozilla
+        42912	./.cache
+        8	./.dbus/session-bus
+        8	./.dbus
+        0	./.config/ibus/bus
+        0	./.config/ibus
+        4	./.config/geany/filedefs
+        0	./.config/geany/templates/files
+        4	./.config/geany/templates
+        0	./.config/geany/tags
+        16	./.config/geany
+        0	./.config/gtk-3.0
+        4	./.config/dconf
+        20	./.config
+        0	./FOLDER1
+        0	./FOLDER
+        0	./FOLDER123
+        0	./.local/share/keyrings
+        4	./.local/share
+        4	./.local
+        8	./.mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}
+        8	./.mozilla/extensions
+        0	./.mozilla/firefox/Crash Reports/events
+        4	./.mozilla/firefox/Crash Reports
+        0	./.mozilla/firefox/Pending Pings
+        0	./.mozilla/firefox/ccifue6q.default-release/minidumps
+        0	./.mozilla/firefox/ccifue6q.default-release/crashes/events
+        4	./.mozilla/firefox/ccifue6q.default-release/crashes
+        2564	./.mozilla/firefox/ccifue6q.default-release/security_state
+        0	./.mozilla/firefox/ccifue6q.default-release/storage/permanent/chrome/idb/3870112724rsegmnoittet-es.files
+        0	./.mozilla/firefox/ccifue6q.default-release/storage/permanent/chrome/idb/3561288849sdhlie.files
+        0	./.mozilla/firefox/ccifue6q.default-release/storage/permanent/chrome/idb/1451318868ntouromlalnodry--epcr.files
+        0	./.mozilla/firefox/ccifue6q.default-release/storage/permanent/chrome/idb/1657114595AmcateirvtiSty.files
+        0	./.mozilla/firefox/ccifue6q.default-release/storage/permanent/chrome/idb/2823318777ntouromlalnodry--naod.files
+        0	./.mozilla/firefox/ccifue6q.default-release/storage/permanent/chrome/idb/2918063365piupsah.files
+        8200	./.mozilla/firefox/ccifue6q.default-release/storage/permanent/chrome/idb
+        8204	./.mozilla/firefox/ccifue6q.default-release/storage/permanent/chrome
+        8204	./.mozilla/firefox/ccifue6q.default-release/storage/permanent
+        0	./.mozilla/firefox/ccifue6q.default-release/storage/temporary
+        0	./.mozilla/firefox/ccifue6q.default-release/storage/default/moz-extension+++ae03ad37-637c-4c3f-99bc-0ef33a6ae617^userContextId=4294967295/      idb/3647222921wleabcEoxlt-eengsairo.files
+        44	./.mozilla/firefox/ccifue6q.default-release/storage/default/moz-extension+++ae03ad37-637c-4c3f-99bc-0ef33a6ae617^userContextId=4294967295/      idb
+        48	./.mozilla/firefox/ccifue6q.default-release/storage/default/moz-extension+++ae03ad37-637c-4c3f-99bc-0ef33a6ae617^userContextId=4294967295
+        16	./.mozilla/firefox/ccifue6q.default-release/storage/default/https+++www.google.com/ls
+        20	./.mozilla/firefox/ccifue6q.default-release/storage/default/https+++www.google.com
+        68	./.mozilla/firefox/ccifue6q.default-release/storage/default
+        8400	./.mozilla/firefox/ccifue6q.default-release/storage
+        0	./.mozilla/firefox/ccifue6q.default-release/bookmarkbackups
+        0	./.mozilla/firefox/ccifue6q.default-release/datareporting/glean/events
+        8	./.mozilla/firefox/ccifue6q.default-release/datareporting/glean/db
+        0	./.mozilla/firefox/ccifue6q.default-release/datareporting/glean/pending_pings
+        0	./.mozilla/firefox/ccifue6q.default-release/datareporting/glean/tmp
+        8	./.mozilla/firefox/ccifue6q.default-release/datareporting/glean
+        152	./.mozilla/firefox/ccifue6q.default-release/datareporting/archived/2022-03
+        152	./.mozilla/firefox/ccifue6q.default-release/datareporting/archived
+        168	./.mozilla/firefox/ccifue6q.default-release/datareporting
+        12	./.mozilla/firefox/ccifue6q.default-release/sessionstore-backups
+        52	./.mozilla/firefox/ccifue6q.default-release/saved-telemetry-pings
+        22928	./.mozilla/firefox/ccifue6q.default-release
+        4	./.mozilla/firefox/mftz0p9a.default
+        22944	./.mozilla/firefox
+        22952	./.mozilla
+        0	./readonly_file
+        65968	.
+
+<font color="#818181">--Demonter(enlever) la partition1 /dev/nvme0n2p2 du dossier /mnt/FAT32 </font>    
+        <font color="#02db64"><b>[root@fedora ~]# umount /mnt/FAT32 /dev/nvme0n2p2</font>
+        umount: /dev/nvme0n2p2: non monté.
+
+<font color="#818181">--DISK_FREE affiche tous les disques montés et leurs dossier de montage</font>   
+        <font color="#02db64"><b>[root@fedora ~]# df -l</font>
+        Sys. de fichiers blocs de 1K Utilisé Disponible Uti% Monté sur
+        devtmpfs             1967440       0    1967440   0% /dev
+        tmpfs                1987776       0    1987776   0% /dev/shm
+        tmpfs                 795112    1648     793464   1% /run
+        /dev/nvme0n1p2      35650560 4105720   31311064  12% /
+        tmpfs                1987776      12    1987764   1% /tmp
+        /dev/nvme0n1p2      35650560 4105720   31311064  12% /home
+        /dev/nvme0n1p1        996780  175160     752808  19% /boot
+        tmpfs                 397552      88     397464   1% /run/user/1000
+        /dev/sr0             2115360 2115360          0 100% /run/media/matandessaur/Fedora-Cinn-Live-35-1-2
+      
+            </pre>
+</body>
+</html>
