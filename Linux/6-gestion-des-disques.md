@@ -23,21 +23,21 @@ fdisk /dev/sdd # Pour modifier le disque
     ```
 
 ### A) **Créer de nouvelles partitions**
-    ```
-    Command (m for help): n
-    /n
-    e extended
-    p primary partition (1-4)
-    /n
-    Partition number (1-4): (choisir 1 pour la 1ere partition primaire) 
-    ```
-    Pour (Last cylindrer), spécifier la taille de la partition : ici 2 Go (notez +2G) 
-        ```
-        Last cylinder or +size or +sizeM or +sizeK (5660-14946, default 14946): +2G
-        ```
+```
+Command (m for help): n
+/n
+e extended
+p primary partition (1-4)
+/n
+Partition number (1-4): (choisir 1 pour la 1ere partition primaire) 
+```
+Pour (Last cylindrer), spécifier la taille de la partition : ici 2 Go (notez +2G) 
+```
+Last cylinder or +size or +sizeM or +sizeK (5660-14946, default 14946): +2G
+```
 
-    *Pour vérifier*
-    `Command (m for help): p`
+*Pour vérifier*
+`Command (m for help): p`
 
  ###  B) Modifier une partition linux en format FAT32
 
@@ -67,26 +67,45 @@ En tant que root:
 ### E) Monter les partitions sur les dossier
 
 - Créer les dossiers: ` mkdir /mnt/LINUX `
+
 - Montage des partitions sur les dossiers crées: 
     ```
     [root@fed3 ~]# mount -t ext4 /dev/sdd1 /mnt/LINUX/
     [root@fed3 ~]# mount -t vfat /dev/sdd2 /mnt/FAT32/ 
     ```
-- Tester en creant dans les dossiers
+    
+- Rendre permanent:
 
+    ```bash
+    nano /etc/fstab
+    # Dans le fichier, ajouter (ex: ext4, vfat, ntfs):
+    /dev/[nompartition] /mnt/[dossier] [type] defaults 0 0
+    # example:
+    /dev/sdb mnt/sdb ntfs defaults 0 0
+    # Verify with `fintmnt --verify`
+    
+    ```
 
+    
+
+- Tester en créant dans les dossiers
+
+### e) Démonter
+```bash
+umount /mnt/sdd
+```
 _________________________________________________
 
 ## Gestion de l'espace disque
 
 **Display file**
-    ```
-    df -h [fichier.ext]
-    ```
+```bash
+df -h [fichier.ext]
+```
 Affiche les partitions montées ainsi que l'espace occupée par les fichiers/dossiers ainsi que l'espace disponible:
 
-
-
-
-
-
+**Disk Usage**
+```bash
+du -lh
+du -h --max-depth=1 [fichier.ext]
+```

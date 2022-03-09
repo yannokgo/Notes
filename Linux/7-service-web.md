@@ -2,7 +2,7 @@
 
 ## DHCP
 Obtenir une nouvelle adresse ip locale
-    ```bash
+```bash
     sudo dhclient -r  # Release Lease
     sudo dhclient     # get new lease
     sudo dhclient -r eth0 # interface spécifique
@@ -15,7 +15,9 @@ Obtenir une nouvelle adresse ip locale
     ip a
     ip a s eth0
     dhclient -v -r eth0
-    ```
+```
+
+
 
 ## SELINUX
 
@@ -33,10 +35,11 @@ firewall-cmd --get-active-zones
 firewall-cmd --zone=public --list-all # get services under public zone ( traffic entrant autorisé)( public/block/trusted)
 ```
 changer la zone de l'interface:
-    ```bash
-    firewall-cmd --zone=trusted --change-interface=ens160 --permanent
-    firewall-cmd reload
-    ```
+```bash
+firewall-cmd --zone=trusted --change-interface=ens160 --permanent
+firewall-cmd --reload
+```
+
 Tester: 
     ``` 
     firewall-cmd --get-active-zones 
@@ -45,9 +48,10 @@ Tester:
 ## Service Web
 
 Vérifier si Apache est installé:
-    ```bash
-    rpm –qa | grep httpd
-    ```
+```bash
+rpm –qa | grep httpd
+```
+
 Installer httpd en utilisant une des commandes :
     ```bash
     yum install httpd
@@ -62,11 +66,13 @@ Tester le serveur Apache:
     ```bash
     firefox http://localhost
     ```
-Troubleshoot:
+Troubleshooting:
     Vérifier les ports ouverts:
+
     ```bash
     netstat -ntlp
     ```
+
 ## CONFIGURATION DE BASE DU SERVEUR http
 
 Racine de publication du serveur web: /var/www/html
@@ -74,37 +80,49 @@ index.html par default: /etc/httpd/
 Service Web sous Fedora
 
 
-### 5 Differentes configurations
-### a)  Site web par defaut de publication web :
+### 3 Différentes configurations
+### a)  Site web par default de publication web :
             Racine de publication :  /var/www/html/
             Pour tester : creer un fichier : index.html
 
 ### b)  Site de publication a partir des home dir de chaque compte : non autorise par defaut
-Comment autoriser cette operation ?   dans le fichier /etc/httpd/conf.d/userdir.conf
+Comment autoriser cette operation ?   
+Dans le fichier ```/etc/httpd/conf.d/userdir.conf```
 
-    Remplacez la directive :
-    UserDir disabled
-    
-    Par : 
-    UserDir enable
-    
-    et enlevez le # devant la directive :
-    UserDir public_html
-    chmod 755 /home/*
-    su – mario
-    mkdir /home/mario/public_html
-    
-    ```bash
-    su - samir
-    cd ~
-    mkdir public_html
-    chmod 755 public_html
-    # puis créer une page index.html dans ce dossier
-    ```
+Remplacez la directive :
+```UserDir disabled```
+
+Par : 
+```UserDir enabled [user]```
+
+et enlevez le # devant la directive :
+```#UserDir public_html```
+
+ensuite:
+
+```bash
+chmod 755 /home/samir
+su - samir
+cd ~
+mkdir public_html
+chmod 755 public_html
+# puis créer une page index.html dans ce dossier
+```
+
+Pour y accéder:
+
+```
+https://localhost/~user
+```
+
+
 
 ### c) Publication à partir d'un dossier virtuel
+
     En tant que root, créez le dossier web dans /srv :
     mkdir /srv/web
+    # Donnez les authorisations:
+    chmod 755 /srv/web
 
 1) Autoriser la publication à partir de ce dossier dans le fichier de configuration du serveur Web (/etc/httld/conf/httpd.conf) :
     ```
@@ -119,18 +137,86 @@ Comment autoriser cette operation ?   dans le fichier /etc/httpd/conf.d/userdir.
     Require all granted
     </Directory>
     ```
-3) Créez un alias d’accès à ce dossier virtuel : /srv/web dans le fichier /etc/httpd.conf/httpd.conf dans la section <IfModule alias_module>:
+3) Créez un alias d’accès à ce dossier virtuel : /srv/web dans le fichier `/etc/httpd.conf/httpd.conf` dans la section` <IfModule alias_module>`:
 3) Ajoutez la ligne suivante :
-    ```bash
-    Alias /web /sev/web
-    ```
-
+   
+    `Alias /web /sev/web`
+    
 4) Créez une page html index.html dans ce dossier.
 5) Puis y accéder avec : firefox http://localhost/web
 
+### d) Plusieurs serveurs sur UNE adresse IP
 
-Tester : avec lynx 
+```
+Identifier chaque hôte http par un nom:
+    - 1er site: www.adrian.tld     \
+    - 2eme site: data.adrian.tld    > Utilisent le même IP
+    - 3eme site: info.adrian.tld   /
+
+1er: /var/www/www
+2eme: /var/www/data
+3eme: /var/www/info
+```
+
+#### Étapes:
+1. Pour chaque hôte HTTP => créer un dossier
+```bash
+mkdir /var/www/www /var/www/data /var/www/info
+```
+
+2. Créer index.html dans chaque dossier
+
+3. Configurer les hôtes virtuels dans un fichier de config
+    nom => www.adrian.tld => /var/www/www
+```bash
+geany /etc/httpd/conf.d/http_virtuels.conf
+```
+```bash
+<VirtualHost *:80>
+    ServerAdmin webmaster@adrian.tld
+    DocumentRoot "/var/www/www"
+    ServerName www.adrian.tld
+    ServerAlias www.milea.tld
+</VirtualHost>
+<VirtualHost *:80>
+    ServerAdmin webmaster@adrian.tld
+    DocumentRoot "/var/www/www"
+    ServerName www.adrian.tld
+</VirtualHost>
+<VirtualHost *:80>
+    ServerAdmin webmaster@adrian.tld
+    DocumentRoot "/var/www/www"
+    ServerName www.adrian.tld
+</VirtualHost>
+```
+Redémarrer le service:
+```bash
+systemctl restart httpd
+```
+4. Associer les 3 noms d'hôtes à des adresses IPs
+```bash
+nano /etc/hosts
+```
+Ajouter :
+```
+10.30.43.134 www.adrian.tld data.adrian.tlr info.adria.tld www.mliea.tld
+```
+Tester avec ping :
+```bash
+ping -c 3 www.adrian.tld
+ping -c 3 data.adrian.tld
+ping -c 3 info.adrian.tld
+ping -c 3 www.milea.tld
+# test ultime
+lynx http://www.milea.tld # sur chaque
+```
+
+
+_________________________________________
+Tester avec lynx: 
 lynx http://10.30.31.125/~lee
+
+***************************************************
 
 ## ANNEXE
 
