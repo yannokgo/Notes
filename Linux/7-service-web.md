@@ -180,13 +180,13 @@ geany /etc/httpd/conf.d/http_virtuels.conf
 </VirtualHost>
 <VirtualHost *:80>
     ServerAdmin webmaster@adrian.tld
-    DocumentRoot "/var/www/www"
-    ServerName www.adrian.tld
+    DocumentRoot "/var/www/data"
+    ServerName data.adrian.tld
 </VirtualHost>
 <VirtualHost *:80>
     ServerAdmin webmaster@adrian.tld
-    DocumentRoot "/var/www/www"
-    ServerName www.adrian.tld
+    DocumentRoot "/var/www/info"
+    ServerName info.adrian.tld
 </VirtualHost>
 ```
 Redémarrer le service:
@@ -199,7 +199,7 @@ nano /etc/hosts
 ```
 Ajouter :
 ```
-10.30.43.134 www.adrian.tld data.adrian.tlr info.adria.tld www.mliea.tld
+10.30.43.134 www.adrian.tld data.adrian.tld info.adria.tld www.mliea.tld
 ```
 Tester avec ping :
 ```bash
@@ -211,10 +211,60 @@ ping -c 3 www.milea.tld
 lynx http://www.milea.tld # sur chaque
 ```
 
+### e) Authentication
 
-_________________________________________
-Tester avec lynx: 
-lynx http://10.30.31.125/~lee
+1) créer un dossier avec lees autorisations 755
+```bash
+mkdir /srv/auth
+chmod 755 /srv/auth
+```
+
+2) Authoriser la publication web a partir du fichier `/etc/httpd/conf/httpd.conf`
+```bash
+<Directory "/srv/auth">
+    AllowOverride AuthConfig
+    # Allow open access:
+    Require all granted
+</Directory>
+```
+
+3) Créer les comptes et mots de passe puis vérifier
+```bash
+htpasswd -c /var/www/utilisateurs
+cat /var/www/utilisateurs
+```
+
+4) Créer le fichier .htaccess dans /srv/auth
+```bash
+AuthName "Restricted Content - Bonjour"
+AuthType Basic
+AuthUserFile "/var/www/utilisateurs"
+Require valid-user
+
+```
+
+5) Ajouter le site au fichier `/etc/hosts`
+```
+192.168.20.128 www.adrian.tld www.milea.tld info.adrian.tld data.adrian.tld auth.adrian.tld
+```
+
+6) Déclarer le site dans `/etc/httpd/conf.d/http_virtuels.conf`
+```bash
+<VirtualHost *:80>
+    ServerAdmin webmaster@adrian.tld
+    DocumentRoot "/srv/auth"
+    ServerName auth.adrian.tld
+</VirtualHost>
+```
+
+7) Créer un fichier index.html dans `/srv/auth`
+
+8) Redémarrer le service httpd: `systemctl restart httpd`
+
+9) Tester: `lynx http://auth.adrian.tld`
+Entrez le nom de l'utilisateur et son password
+
+
 
 ***************************************************
 
