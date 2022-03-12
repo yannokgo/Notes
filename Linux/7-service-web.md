@@ -224,7 +224,7 @@ chmod 755 /srv/auth
 <Directory "/srv/auth">
     AllowOverride AuthConfig
     # Allow open access:
-    Require all granted
+    Require all granted  # ou valid-user
 </Directory>
 ```
 
