@@ -230,7 +230,8 @@ chmod 755 /srv/auth
 
 3) Créer les comptes et mots de passe puis vérifier
 ```bash
-htpasswd -c /var/www/utilisateurs
+htpasswd -c /var/www/utilisateurs lee # Pour le premier utilisateur
+htpasswd /var/www/utilisateurs ricardo # Pour ajouter des utilisateurs
 cat /var/www/utilisateurs
 ```
 
